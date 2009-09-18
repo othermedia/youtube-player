@@ -18,6 +18,13 @@ packages:
     meta:
       requires:
         - JS.Class
+        - JS.State
+        - swfobject
+        - YAHOO.widget.Slider
+        - Ojay
+        - Ojay.Observable
+        - Ojay.HTML
+        - Ojay.URI
       provides:
         - YoutubePlayer
 
