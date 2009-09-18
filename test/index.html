@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>YoutubePlayer Tests</title>
+    
+    <!-- FIXME replace example.com with your Helium server -->
+    <script type="text/javascript">
+    JSCLASS_PATH = 'http://example.com/js/js.class/2.1.x/build/min';</script>
+    
+    <script src="http://example.com/js/js.class/2.1.x/build/min/loader.js" type="text/javascript"></script>
+    <script src="http://example.com/js/packages.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+    // FIXME declare which remote branches to use
+    // Helium.use('yui', '2.7.0');
+    </script>
+    
+    <!-- Package file for youtube-player (run `jake` to generate this) -->
+    <script src="./packages.js" type="text/javascript"></script>
+  </head>
+  <body>
+    
+    <script type="text/javascript">
+    require('YoutubePlayer', function() {
+        
+        // FIXME write some tests
+        alert('Version: ' + YoutubePlayer.VERSION);
+    });
+    </script>
+    
+  </body>
+</html>
