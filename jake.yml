@@ -27,4 +27,3 @@ packages:
         - Ojay.URI
       provides:
         - YoutubePlayer
-

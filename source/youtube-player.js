@@ -48,7 +48,7 @@ var YoutubePlayer = new JS.Class({
         var element = Ojay.byId(this._elementId), width = element.getWidth();
         if (!this.klass.hasAcceptableFlash()) element.insert(this.klass._getFlashWarning(), 'before');
         
-        swfobject.embedSWF( url, this._elementId,
+        swfobject.embedSWF( url, escape(this._elementId),
                             width, this._options.height || width / this.klass.ASPECT_RATIO,
                             this.klass.FLASH_VERSION,
                             null, null,
