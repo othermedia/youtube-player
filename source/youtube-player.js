@@ -16,7 +16,8 @@ var YoutubePlayer = new JS.Class({
         this._elementId = elementId;
         this._options   = options || {};
         
-        this._options.skipTime = this._options.skipTime || this.klass.SKIP_TIME;
+        this._options.skipTime    = options.skipTime    || this.klass.SKIP_TIME;
+        this._options.volumeSteps = options.volumeSteps || this.klass.VOLUME_STEPS;
         
         this.klass._register(this);
         
@@ -208,21 +209,23 @@ var YoutubePlayer = new JS.Class({
     },
     
     /**
-     * Increases the volume by 25%.
+     * Increases the volume by one step, where the total number of steps is
+     * determined by the volumeSteps option.
      * @returns {YoutubePlayer}
      */
     increaseVolume: function() {
-        var volume = this._getPlayer().getVolume() + 25;
+        var volume = this._getPlayer().getVolume() + 100 / this._options.volumeSteps;
         if (volume > 100) volume = 100;
         this.setVolume(volume / 100);
     },
     
     /**
-     * Decreases the volume by 25%.
+    * Decreases the volume by one step, where the total number of steps is
+    * determined by the volumeSteps option.
      * @returns {YoutubePlayer}
      */
     decreaseVolume: function() {
-        var volume = this._getPlayer().getVolume() - 25;
+        var volume = this._getPlayer().getVolume() - 100 / this._options.volumeSteps;
         if (volume < 0) volume = 0;
         this.setVolume(volume / 100);
     },
@@ -253,7 +256,6 @@ var YoutubePlayer = new JS.Class({
         return mins + ':' + (secs < 10 ? '0' : '') + secs;
     } catch (e) {
         return '';
-        
     }},
     
     /**
@@ -405,6 +407,14 @@ var YoutubePlayer = new JS.Class({
          * control is used.
          */
         SKIP_TIME: 15,
+        
+        /**
+         * The number of steps from silent to full volume. This controls how
+         * many step controls are displayed, as well as the fraction by which
+         * the volume is increased or decreased by the volume up and down
+         * controls.
+         */
+        VOLUME_STEPS: 4,
         
         FLASH_VERSION: '8',
         ASPECT_RATIO: 4/3,
