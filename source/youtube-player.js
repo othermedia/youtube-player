@@ -355,9 +355,9 @@ var YoutubePlayer = new JS.Class({
          */
         hasAcceptableFlash: function() {
             var expected = this.MINIMUM_FLASH_VERSION, actual = swfobject.getFlashPlayerVersion();
-            return !(actual.major < expected.major
-                  || actual.minor < expected.minor
-                  || actual.release < expected.release);
+            return !(actual.major < expected.major ||
+                     actual.minor < expected.minor ||
+                     actual.release < expected.release);
         },
         
         /**
@@ -368,8 +368,7 @@ var YoutubePlayer = new JS.Class({
             return Ojay.HTML.p({className: 'flash-warning'},
                 'If this media player does not work for you, try ',
                 Ojay.HTML.a({href: self.FLASH_DOWNLOAD_URL},
-                        'installing the latest Flash plugin'), '.'
-            );
+                        'installing the latest Flash plugin'), '.');
         },
                 
         /* Where to go to download Flash */
