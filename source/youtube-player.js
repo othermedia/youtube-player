@@ -64,6 +64,7 @@ var YoutubePlayer = new JS.Class({
         var elements = this._elements, self = this;
         if (elements._container) return elements._container;
         elements._container = Ojay( Ojay.HTML.div({className: 'youtube-controls'}, function(HTML) {
+            HTML.h3({className: 'controls-header'}, 'Video player controls');
             elements._playButton = Ojay(HTML.button({className: 'play-pause'}, 'Play'));
             HTML.div({className: 'progress'}, 'Progress:');
             HTML.concat(self.getProgressSliderElement().node);
