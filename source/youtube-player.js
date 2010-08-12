@@ -157,13 +157,13 @@ var YoutubePlayer = new JS.Class({
      * @returns {YoutubePlayer}
      */
     setVolume: function(volume) {
-    	if (volume === undefined) volume = this._getPlayer().getVolume();
+        if (volume === undefined) volume = this._getPlayer().getVolume();
         if (volume > 1) volume = volume / 100;
         
         var distance = volume * this._volumeSliderLimit;
         this._volumeSlider.setValue(distance, true, true, true);
         this._volumeBar.setStyle({width: this._thumbWidth * volume +
-        	                             distance + 'px'});
+                                         distance + 'px'});
         
         this._getPlayer().setVolume(volume * 100);
         return this;
@@ -389,4 +389,3 @@ var YoutubePlayer = new JS.Class({
 onYouTubePlayerReady = function(playerId) {
     YoutubePlayer.findById(playerId)._onready();
 };
-
