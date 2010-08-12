@@ -16,6 +16,8 @@ var YoutubePlayer = new JS.Class({
         this._elementId = elementId;
         this._options   = options || {};
         
+        this._options.skipTime = this._options.skipTime || this.klass.SKIP_TIME;
+        
         this.klass._register(this);
         
         var elements = this._elements = {};
@@ -63,16 +65,33 @@ var YoutubePlayer = new JS.Class({
     getHTML: function() {
         var elements = this._elements, self = this;
         if (elements._container) return elements._container;
-        elements._container = Ojay( Ojay.HTML.div({className: 'youtube-controls'}, function(HTML) {
-            HTML.h3({className: 'controls-header'}, 'Video player controls');
-            elements._playButton = Ojay(HTML.button({className: 'play-pause'}, 'Play'));
-            HTML.div({className: 'progress'}, 'Progress:');
-            HTML.concat(self.getProgressSliderElement().node);
-            elements._time = Ojay( HTML.div({className: 'time'}) );
-            HTML.div({className: 'volume'}, 'Volume:');
-            HTML.concat(self.getVolumeSliderElement().node);
-        }) );
+        elements._container = Ojay(Ojay.HTML.div({className: 'youtube-controls'}, function(C) {
+            C.h3({className: 'controls-header'}, 'Video player controls');
+            
+            elements._playButton = Ojay(C.button({className: 'play-pause'}, 'Play'));
+            
+            C.div({className: 'progress-controls'}, function(P) {
+                elements._time = Ojay(P.div({className: 'time'}));
+                elements._skipBack = Ojay(P.button({className: 'skip-back'}, 'Skip back'));
+                P.concat(self.getProgressSliderElement().node);
+                elements._skipForward = Ojay(P.button({className: 'skip-forwards'}, 'Skip forwards'));
+            });
+            
+            C.div({className: 'volume-controls'}, function(V) {
+                elements._volumeDownButton = Ojay(V.button({className: 'volume-down'}, 'Lower volume'));
+                V.concat(self.getVolumeSliderElement().node);
+                elements._volumeUpButton = Ojay(V.button({className: 'volume-up'}, 'Raise volume'));
+            });
+        }));
+        
         elements._playButton.on('click')._(this).toggle();
+        
+        elements._skipBack.on('click', Ojay.stopDefault)._(this).skip(-this.klass.SKIP_TIME);
+        elements._skipForward.on('click', Ojay.stopDefault)._(this).skip(this.klass.SKIP_TIME);
+        
+        elements._volumeDownButton.on('click', Ojay.stopDefault)._(this).decreaseVolume();
+        elements._volumeUpButton.on('click', Ojay.stopDefault)._(this).increaseVolume();
+        
         return elements._container;
     },
     
@@ -117,6 +136,25 @@ var YoutubePlayer = new JS.Class({
     setCompletion: function(offset) {
         var player = this._getPlayer();
         player.seekTo(offset * player.getDuration(), true);
+        return this;
+    },
+    
+    /**
+     * Skips forward or back in time by the specified nubmer of seconds.
+     * Providing a negative number skips back.
+     */
+    skip: function(offset) {
+        var player   = this._getPlayer(),
+            time     = player.getCurrentTime(),
+            skipTime = time + offset;
+        
+        if (skipTime < 0) {
+            skipTime = 0;
+        } else if (skipTime > (duration = player.getDuration())) {
+            skipTime = duration - 5;
+        }
+        
+        player.seekTo(skipTime);
         return this;
     },
     
@@ -167,6 +205,26 @@ var YoutubePlayer = new JS.Class({
         
         this._getPlayer().setVolume(volume * 100);
         return this;
+    },
+    
+    /**
+     * Increases the volume by 25%.
+     * @returns {YoutubePlayer}
+     */
+    increaseVolume: function() {
+        var volume = this._getPlayer().getVolume() + 25;
+        if (volume > 100) volume = 100;
+        this.setVolume(volume / 100);
+    },
+    
+    /**
+     * Decreases the volume by 25%.
+     * @returns {YoutubePlayer}
+     */
+    decreaseVolume: function() {
+        var volume = this._getPlayer().getVolume() - 25;
+        if (volume < 0) volume = 0;
+        this.setVolume(volume / 100);
     },
     
     /**
@@ -341,6 +399,12 @@ var YoutubePlayer = new JS.Class({
         _dispatchStateEvent: function(playerId, state) {
             YoutubePlayer.findById(playerId)._dispatchStateEvent(state);
         }.curry(),
+        
+        /**
+         * The amount of time, in seconds, to seek forwards or back when a skip
+         * control is used.
+         */
+        SKIP_TIME: 15,
         
         FLASH_VERSION: '8',
         ASPECT_RATIO: 4/3,
