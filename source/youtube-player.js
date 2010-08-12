@@ -28,12 +28,12 @@ var YoutubePlayer = new JS.Class({
         this.on('playing', function(player) {
             player.klass._playing(player);
             player.setState('PLAYING');
-            player._elements._playButton.removeClass('play').addClass('pause');
+            player._elements._playButton.removeClass('play').addClass('pause').setContent('Pause');
         });
         
         this.on('paused', function(player) {
             player.setState('PAUSED');
-            player._elements._playButton.removeClass('pause').addClass('play');
+            player._elements._playButton.removeClass('pause').addClass('play').setContent('Play');
         });
     },
     
@@ -64,7 +64,7 @@ var YoutubePlayer = new JS.Class({
         var elements = this._elements, self = this;
         if (elements._container) return elements._container;
         elements._container = Ojay( Ojay.HTML.div({className: 'youtube-controls'}, function(HTML) {
-            elements._playButton = Ojay( HTML.div({className: 'play-pause'}) );
+            elements._playButton = Ojay(HTML.button({className: 'play-pause'}, 'Play'));
             HTML.div({className: 'progress'}, 'Progress:');
             HTML.concat(self.getProgressSliderElement().node);
             elements._time = Ojay( HTML.div({className: 'time'}) );
