@@ -26,7 +26,6 @@ var YoutubePlayer = new JS.Class({
         
         this._embed();
         this._setupProgressSlider();
-        this._setupVolumeSlider();
         
         this.on('playing', function(player) {
             player.klass._playing(player);
@@ -80,7 +79,7 @@ var YoutubePlayer = new JS.Class({
             
             C.div({className: 'volume-controls'}, function(V) {
                 elements._volumeDownButton = Ojay(V.button({className: 'volume-down'}, 'Lower volume'));
-                V.concat(self.getVolumeSliderElement().node);
+                V.concat(self.getVolumeSteps().node);
                 elements._volumeUpButton = Ojay(V.button({className: 'volume-up'}, 'Raise volume'));
             });
         }));
@@ -159,52 +158,43 @@ var YoutubePlayer = new JS.Class({
         return this;
     },
     
-    /**
-     * Returns HTML elements required to implement a slider.
-     * @returns {DomCollection}
-     */
-    getVolumeSliderElement: function() {
-        var elements = this._elements;
-        return elements._volumeSlider = Ojay( Ojay.HTML.div({className: 'volume-slider'}, function(HTML) {
-            elements._volumeSliderThumb = Ojay( HTML.div({className: 'thumb'}) );
-        }) );
-    },
-    
-    /**
-     */
-    _setupVolumeSlider: function() {
+    getVolumeSteps: function() {
+        if (this._elements._volumeSteps) return this._elements._volumeSteps;
+        
         var elements = this._elements,
-            thumbWidth = elements._volumeSliderThumb.getWidth(),
-            sliderWidth = elements._volumeSlider.getWidth();
+            numSteps = this._options.volumeSteps,
+            step     = 100 / numSteps,
+            self     = this;
+        
+        if (numSteps < 1) numSteps = 1;
+        
+        return elements._volumeSteps = Ojay(Ojay.HTML.div({className: 'volume-steps steps-' + numSteps}, function(V) {
+            var stepAmount, ctrl, i;
             
-        var limit = this._volumeSliderLimit = sliderWidth - thumbWidth;
-        this._volumeSlider = YAHOO.widget.Slider.getHorizSlider(elements._volumeSlider.node,
-                elements._volumeSliderThumb.node, 0, this._volumeSliderLimit);
-        
-        this._volumeBar = Ojay(Ojay.HTML.div({className: 'volume-bar', style: {width: 0}}));
-        Ojay(this._volumeSlider.getEl()).insert(this._volumeBar, 'before');
-        
-        var player = this._getPlayer(), self = this;
-        this._volumeSlider.subscribe('change', function(value) {
-            self.setVolume(value / limit);
-        });
+            for (i = 0; i < numSteps; i++) {
+                stepAmount = 100 / i;
+                elements['_stepControl' + i] = ctrl = Ojay(V.span({className: 'step step-' + i}));
+                ctrl.on('click')._(self).setVolume(stepAmount);
+            }
+        }));
     },
     
     /**
-     * Sets the volume as a fraction between 0 and 1
+     * Sets the volume as a percentage.
      * @param {Number} volume
      * @returns {YoutubePlayer}
      */
     setVolume: function(volume) {
-        if (volume === undefined) volume = this._getPlayer().getVolume();
-        if (volume > 1) volume = volume / 100;
+        var player        = this._getPlayer(),
+            currentVolume = player.getVolume(),
+            classPrefix   = 'volume-level-';
         
-        var distance = volume * this._volumeSliderLimit;
-        this._volumeSlider.setValue(distance, true, true, true);
-        this._volumeBar.setStyle({width: this._thumbWidth * volume +
-                                         distance + 'px'});
+        if (volume === undefined) volume = currentVolume;
         
-        this._getPlayer().setVolume(volume * 100);
+        this._elements._volumeSteps.replaceClass(classPrefix + currentVolume,
+                                                 classPrefix + (volume));
+        
+        player.setVolume(volume);
         return this;
     },
     
@@ -214,9 +204,10 @@ var YoutubePlayer = new JS.Class({
      * @returns {YoutubePlayer}
      */
     increaseVolume: function() {
-        var volume = this._getPlayer().getVolume() + 100 / this._options.volumeSteps;
+        var step   = 100 / this._options.volumeSteps,
+            volume = this._getPlayer().getVolume() + step;
         if (volume > 100) volume = 100;
-        this.setVolume(volume / 100);
+        this.setVolume(volume);
     },
     
     /**
@@ -225,9 +216,10 @@ var YoutubePlayer = new JS.Class({
      * @returns {YoutubePlayer}
      */
     decreaseVolume: function() {
-        var volume = this._getPlayer().getVolume() - 100 / this._options.volumeSteps;
+        var step   = 100 / this._options.volumeSteps,
+            volume = this._getPlayer().getVolume() - step;
         if (volume < 0) volume = 0;
-        this.setVolume(volume / 100);
+        this.setVolume(volume);
     },
     
     /**
