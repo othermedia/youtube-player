@@ -315,7 +315,7 @@ var YoutubePlayer = new JS.Class({
          */
         getPlayerURL: function(playerId) {
             if (this.API_KEY === null) return null;
-            var uri = Ojay.URI.parse('http://gdata.youtube.com/apiplayer?enablejsapi=1');
+            var uri = Ojay.URI.parse('http://www.youtube.com/apiplayer?enablejsapi=1');
             uri.setParam('key', this.API_KEY);
             uri.setParam('playerapiid', playerId);
             return uri.toString();
