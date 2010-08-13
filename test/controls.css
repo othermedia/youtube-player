@@ -1,0 +1,119 @@
+.youtube-controls {
+    padding:4px 0;
+    height:22px;
+    background:#4c4c4c;
+    color:#fffefe;
+    font-size:13px;
+    font-family:Helvetica, Arial, sans-serif;
+    *font-family:Arial, sans-serif;
+}
+
+.youtube-controls button {
+    height:22px;
+    background:#4c4c4c url('video-controls.png') no-repeat;
+    color:#fffefe;
+    float:left;
+    display:block;
+    border:none;
+    text-indent:-9999em;
+    cursor:pointer;
+}
+
+.youtube-controls .controls-header {
+    position:absolute;
+    left:-9999em;
+    width:0;
+    height:0;
+}
+
+.youtube-controls .play-pause {
+    width:39px;
+    height:22px;
+    float:left;
+    margin:0;
+    border-right:1px solid #797979;
+    padding:0;
+    background-position:16px 0;
+}
+
+.youtube-controls .pause {
+    background-position:15px -22px;
+}
+
+.youtube-controls .progress-controls {
+    float:left;
+    position:relative;
+    width:250px;
+}
+
+.youtube-controls .time {
+    width:30px;
+    float:left;
+    padding:5px 10px;
+    line-height:1;
+}
+
+.youtube-controls .skip-back {
+    width:32px;
+    background-position:9px -44px;
+}
+
+.youtube-controls .skip-forward {
+    width:29px;
+    background-position:8px -66px;
+}
+
+.youtube-controls .progress-slider {
+    width:100px;
+    height:4px;
+    margin:8px 0;
+    border:1px solid #fff;
+    padding:0;
+    float:left;
+}
+
+.youtube-controls .volume-controls {
+    width:74px;
+    height:22px;
+    border-left:1px solid #797979;
+    float:right;
+}
+
+.youtube-controls .volume-down {
+    width:25px;
+    background-position:10px -88px;
+}
+
+.youtube-controls .volume-up {
+    width:28px;
+    background-position:9px -110px;
+}
+
+.youtube-controls .volume-steps {
+    width:20px;
+    height:22px;
+    float:left;
+    background:#4c4c4c url('video-controls.png') no-repeat 1px -220px;
+}
+
+.youtube-controls .volume-steps .step {
+    width:5px;
+    height:22px;
+    float:left;
+}
+
+.youtube-controls .volume-level-0 {
+    background-position:1px -132px;
+}
+
+.youtube-controls .volume-level-25 {
+    background-position:1px -154px;
+}
+
+.youtube-controls .volume-level-50 {
+    background-position:1px -176px;
+}
+
+.youtube-controls .volume-level-75 {
+    background-position:1px -198px;
+}

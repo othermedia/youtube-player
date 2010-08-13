@@ -43,100 +43,9 @@
         object#video-container {
             display:block;
         }
-        
-        
-        /**
-         * YouTube player control styling.
-         */
-        
-        .youtube-controls {
-            padding:4px 0;
-            height:22px;
-            background:#4c4c4c;
-            color:#fffefe;
-            font-size:13px;
-            font-family:Helvetica, Arial, sans-serif;
-            *font-family:Arial, sans-serif;
-        }
-        
-        .youtube-controls button {
-            height:22px;
-            background:#4c4c4c url('graphics/video-controls.png') no-repeat;
-            color:#fffefe;
-            float:left;
-            display:block;
-            border:none;
-            text-indent:-9999em;
-            cursor:pointer;
-        }
-        
-        .youtube-controls .controls-header {
-            position:absolute;
-            left:-9999em;
-            width:0;
-            height:0;
-        }
-        
-        .youtube-controls .play-pause {
-            width:39px;
-            height:22px;
-            float:left;
-            margin:0;
-            border-right:1px solid #797979;
-            padding:0;
-            background-position:16px 0;
-        }
-        
-        .youtube-controls .pause {
-            background-position:15px -22px;
-        }
-        
-        .youtube-controls .progress-controls {
-            float:left;
-            position:relative;
-            width:200px;
-        }
-        
-        .youtube-controls .progress-controls .time {
-            width:30px;
-            padding:5px 10px;
-            line-height:1;
-        }
-        
-        .youtube-controls .progress-controls .skip-back {
-            background-position:16px -44px;
-        }
-        
-        .youtube-controls .progress-controls .skip-forward {
-            background-position:16px -66px;
-        }
-        
-        .youtube-controls .progress-slider {
-            width:100px;
-            height:4px;
-            margin:8px 0;
-            border:1px solid #fff;
-            padding:0;
-            float:left;
-        }
-        
-        .youtube-controls .volume-controls {
-            width:74px;
-            height:22px;
-            border-left:1px solid #797979;
-            float:right;
-        }
-        
-        .youtube-controls .volume-controls .volume-down {
-            width:26px;
-            background-position:16px -88px;
-        }
-        
-        .youtube-controls .volume-controls .volume-up {
-            width:29px;
-            background-position:16px -110px;
-        }
     </style>
+    
+    <link rel="stylesheet" type="text/css" href="controls.css">
     
     <script src="http://js.othermedia.com/helium.js" type="text/javascript"></script>
     
@@ -144,8 +53,6 @@
         Helium.use('yui', '2.8.0r4');
         Helium.use('ojay', '0.4.2');
         Helium.use('swfobject', 'master');
-        
-        Helium.YOUTUBE_API_KEY = 'AI39si4Ra2-YFllZBnmFlHzD7xTbAvSvUCvoBmhJdllmX_aRQqDMXlhTzJpEp3lDoC_aaXSNLVQ9ZbAuLP-qqR6htFqj5t4pAg';
     </script>
     
     <script src="./packages.js" type="text/javascript"></script>
@@ -157,11 +64,11 @@
     
     <script type="text/javascript">
         require('YoutubePlayer', function() {
-            YoutubePlayer.API_KEY = Helium.YOUTUBE_API_KEY;
+            YoutubePlayer.API_KEY = 'AI39si4Ra2-YFllZBnmFlHzD7xTbAvSvUCvoBmhJdllmX_aRQqDMXlhTzJpEp3lDoC_aaXSNLVQ9ZbAuLP-qqR6htFqj5t4pAg';
             
-            var player = new YoutubePlayer('x0JNTF6hZR4', 'videocontainer', {
-                height:      450,
-                skipTime:    20,
+            var player = new YoutubePlayer('oIr8-f2OWhs', 'videocontainer', {
+                height:      338,
+                skipTime:    30,
                 volumeSteps: 4
             });
         });
