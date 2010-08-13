@@ -44,7 +44,6 @@
 .youtube-controls .progress-controls {
     float:left;
     position:relative;
-    width:250px;
 }
 
 .youtube-controls .time {
@@ -56,21 +55,35 @@
 
 .youtube-controls .skip-back {
     width:32px;
+    border-left:1px solid #797979;
     background-position:9px -44px;
 }
 
 .youtube-controls .skip-forward {
     width:29px;
+    float:right;
     background-position:8px -66px;
 }
 
 .youtube-controls .progress-slider {
-    width:100px;
     height:4px;
     margin:8px 0;
     border:1px solid #fff;
     padding:0;
     float:left;
+}
+
+.youtube-controls .progress-bar {
+    height:6px;
+    margin:8px 0;
+    position:absolute;
+    top:0;
+    left:82px;
+    background:#fff;
+}
+
+.youtube-controls .thumb {
+    width:30px;
 }
 
 .youtube-controls .volume-controls {

@@ -71,18 +71,18 @@ var YoutubePlayer = new JS.Class({
             
             elements._playButton = Ojay(C.button({className: 'play-pause'}, 'Play'));
             
-            C.div({className: 'progress-controls'}, function(P) {
+            elements._progressWrapper = Ojay(C.div({className: 'progress-controls'}, function(P) {
                 elements._time = Ojay(P.div({className: 'time'}));
                 elements._skipBack = Ojay(P.button({className: 'skip-back'}, 'Skip back'));
                 P.concat(self.getProgressSliderElement().node);
                 elements._skipForward = Ojay(P.button({className: 'skip-forward'}, 'Skip forwards'));
-            });
+            }));
             
-            C.div({className: 'volume-controls'}, function(V) {
+            elements._volumeWrapper = Ojay(C.div({className: 'volume-controls'}, function(V) {
                 elements._volumeDownButton = Ojay(V.button({className: 'volume-down'}, 'Lower volume'));
                 V.concat(self.getVolumeSteps().node);
                 elements._volumeUpButton = Ojay(V.button({className: 'volume-up'}, 'Raise volume'));
-            });
+            }));
         }));
         
         elements._playButton.on('click')._(this).toggle();
@@ -111,8 +111,16 @@ var YoutubePlayer = new JS.Class({
      */
     _setupProgressSlider: function() {
         var elements    = this._elements,
+            slider      = elements._progressSlider,
             thumbWidth  = elements._progressSliderThumb.getWidth(),
-            sliderWidth = elements._progressSlider.getWidth();
+            wrapWidth   = elements._container.getWidth() -
+                elements._playButton.getWidth() -
+                elements._volumeWrapper.getWidth(),
+            sliderWidth = wrapWidth - 2 -
+                slider.siblings().reduce(function(rt, e) { return rt + e.getWidth(); }, 0);
+        
+        elements._progressWrapper.setStyle({width: wrapWidth + 'px'});
+        slider.setStyle({width: sliderWidth + 'px'});
         
         var limit = this._progressSliderLimit = sliderWidth - thumbWidth;
         this._progressSlider = YAHOO.widget.Slider.getHorizSlider(elements._progressSlider.node,
