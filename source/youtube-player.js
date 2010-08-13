@@ -74,7 +74,7 @@ var YoutubePlayer = new JS.Class({
                 elements._time = Ojay(P.div({className: 'time'}));
                 elements._skipBack = Ojay(P.button({className: 'skip-back'}, 'Skip back'));
                 P.concat(self.getProgressSliderElement().node);
-                elements._skipForward = Ojay(P.button({className: 'skip-forwards'}, 'Skip forwards'));
+                elements._skipForward = Ojay(P.button({className: 'skip-forward'}, 'Skip forwards'));
             });
             
             C.div({className: 'volume-controls'}, function(V) {
