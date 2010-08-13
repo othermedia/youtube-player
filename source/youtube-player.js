@@ -171,8 +171,8 @@ var YoutubePlayer = new JS.Class({
         return elements._volumeSteps = Ojay(Ojay.HTML.div({className: 'volume-steps steps-' + numSteps}, function(V) {
             var stepAmount, ctrl, i;
             
-            for (i = 0; i < numSteps; i++) {
-                stepAmount = 100 / numSteps * (i + 1);
+            for (i = 1; i <= numSteps; i++) {
+                stepAmount = 100 / numSteps * i;
                 elements['_stepControl' + i] = ctrl = Ojay(V.span({className: 'step step-' + i}));
                 ctrl.on('click')._(self).setVolume(stepAmount);
             }
