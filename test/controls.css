@@ -15,7 +15,9 @@
     color:#fffefe;
     float:left;
     display:block;
+    margin:0;
     border:none;
+    padding:0;
     text-indent:-9999em;
     cursor:pointer;
 }
@@ -54,7 +56,7 @@
 }
 
 .youtube-controls .skip-back {
-    width:32px;
+    width:29px;
     border-left:1px solid #797979;
     background-position:9px -44px;
 }
@@ -62,7 +64,7 @@
 .youtube-controls .skip-forward {
     width:29px;
     float:right;
-    background-position:8px -66px;
+    background-position:10px -66px;
 }
 
 .youtube-controls .progress-slider {
@@ -78,7 +80,7 @@
     margin:8px 0;
     position:absolute;
     top:0;
-    left:82px;
+    left:79px;
     background:#fff;
 }
 
