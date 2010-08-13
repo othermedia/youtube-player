@@ -1,4 +1,4 @@
-Youtube Player
+YouTube Player
 ==============
 
 This library provides accessible HTML controls and easy embedding for YouTube
@@ -12,15 +12,25 @@ Usage
 -----
 
 Using the `YoutubePlayer` class is very straightforward. First, create a
-container to 
+container to insert the video into; normally this is just an empty `div`
+element. Then set the `YoutubePlayer.API_KEY` to your YouTube API key. Finally,
+create a new instance of the `YoutubePlayer` class, passing in the ID of the
+YouTube video you want to embed, the `id` attribute of your container, and (if
+you want to configure the player further) an `options` object.
 
-    YoutubePlayer.API_KEY = '_your_youtube_api_key_';
+    <div id="videocontainer"></div>
     
-    var player = new YoutubePlayer('_youtube_video_id_', '_video_container_', {
-        height:      400,
-        skipTime:    30,
-        volumeSteps: 4
-    });
+    <script type="text/javascript">
+        (function() {
+            YoutubePlayer.API_KEY = '_your_youtube_api_key_';
+            
+            var player = new YoutubePlayer('_video_id_', 'videocontainer', {
+                height:      400,
+                skipTime:    30,
+                volumeSteps: 4
+            });
+        })();
+    </script>
 
 ### Options
 
@@ -49,7 +59,7 @@ depends on, and using the `require` function as usual:
     Helium.use('swfobject', 'master');
     
     require('YoutubePlayer', function() {
-          YoutubePlayer.API_KEY = '_your_youtube_api_key_';
+          YoutubePlayer.API_KEY = '_api_key_';
           
           var player = new YoutubePlayer('_video_id_', '_container_');
     });
