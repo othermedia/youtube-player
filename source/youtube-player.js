@@ -55,6 +55,7 @@ var YoutubePlayer = new JS.Class({
                             this.klass.FLASH_VERSION,
                             null, null,
                             {allowScriptAccess: 'always', wmode: 'transparent'});
+        
         return this;
     },
     
