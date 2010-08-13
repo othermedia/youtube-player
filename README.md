@@ -48,8 +48,9 @@ The `options` object can have three numeric properties:
 
 ### Dependencies
 
-The `YoutubePlayer` class depends on [JS.Class][jsclass], [Ojay][ojay] and
-[SWFObject][swfobject].
+The `YoutubePlayer` class depends on [JS.Class][jsclass], [Ojay][ojay],
+[SWFObject][swfobject] and [`YAHOO.widget.Slider`][slider]. A full list of the
+objects the class depends on is given in the `jake.yml` file.
 
 ### Helium
 
@@ -91,5 +92,6 @@ the `LICENSE` file for details. It was developed by **Benedict Eastaugh**,
   [jsclass]:    http://jsclass.jcoglan.com
   [ojay]:       http://ojay.othermedia.com
   [swfobject]:  http://code.google.com/p/swfobject/
+  [slider]:     http://developer.yahoo.com/yui/slider/
   [helium]:     http://github.com/othermedia/helium
   [othermedia]: http://www.othermedia.com
