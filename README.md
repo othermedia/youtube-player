@@ -32,6 +32,9 @@ you want to configure the player further) an `options` object.
         })();
     </script>
 
+One caveat to all this: the `id` of your container shouldn't include dashes, as
+Flash chokes on them. Use underscores instead.
+
 ### Options
 
 The `options` object can have three numeric properties:
