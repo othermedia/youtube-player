@@ -116,7 +116,7 @@ var YoutubePlayer = new JS.Class({
             wrapWidth   = elements._container.getWidth() -
                 elements._playButton.getWidth() -
                 elements._volumeWrapper.getWidth(),
-            sliderWidth = wrapWidth - 2 -
+            sliderWidth = wrapWidth -
                 slider.siblings().reduce(function(rt, e) { return rt + e.getWidth(); }, 0);
         
         elements._progressWrapper.setStyle({width: wrapWidth + 'px'});
@@ -126,7 +126,7 @@ var YoutubePlayer = new JS.Class({
         this._progressSlider = YAHOO.widget.Slider.getHorizSlider(elements._progressSlider.node,
                 elements._progressSliderThumb.node, 0, this._progressSliderLimit);
         
-        this._progressBar = Ojay(Ojay.HTML.div({className: 'progress-bar', style: {width: 0}}));
+        this._progressBar = Ojay(Ojay.HTML.div({className: 'progress-bar'})).setStyle({width: 0});
         Ojay(this._progressSlider.getEl()).insert(this._progressBar, 'before');
         
         this._thumbWidth = thumbWidth;
