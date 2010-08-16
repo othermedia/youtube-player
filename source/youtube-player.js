@@ -37,6 +37,11 @@ var YoutubePlayer = new JS.Class({
             player.setState('PAUSED');
             player._elements._playButton.removeClass('pause').addClass('play').setContent('Play');
         });
+        
+        this.on('ended', function(player) {
+            player.setState('PAUSED');
+            player._elements._playButton.removeClass('pause').addClass('play').setContent('Play');
+        });
     },
     
     /**
