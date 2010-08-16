@@ -1,0 +1,21 @@
+2010.08.16, Version 1.2.0
+
+* Make play/pause button keyboard-accessible.
+* Add keyboard-accessible skip backwards and forwards controls.
+* Add a test case demonstrating the video player in action.
+* Add a README containing usage instructions.
+* Include a default control style.
+* Add a title to the player controls.
+* Added loading bar to show how much of the video has downloaded.
+* Replace volume slider with a stepped volume control.
+* Add keyboard-accessible increase and decrease volume controls.
+* Reset player state when playback ends.
+* URI-escape the embed element ID.
+
+2010.08.12, Version 1.0.1
+
+* Update YouTube URI to match their API changes.
+
+2009.09.24, Version 1.0.0
+
+* HTML controls and easy embedding for YouTube videos.
