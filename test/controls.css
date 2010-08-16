@@ -72,9 +72,12 @@
     margin:8px 0;
     border:1px solid #fff;
     padding:0;
+    position:absolute;
+    top:0;
+    left:80px;
     float:left;
     line-height:0;
-    position:relative;
+    overflow:hidden;
 }
 
 .youtube-controls .progress-bar {
@@ -82,14 +85,17 @@
     margin:8px 0;
     position:absolute;
     top:0;
-    left:80px;
+    left:81px;
     background:#fff;
+    z-index:3;
+    font-size:0;
     line-height:0;
 }
 
 .youtube-controls .thumb {
     width:30px;
     height:6px;
+    overflow:hidden;
     margin:0;
     padding:0;
     line-height:0;
