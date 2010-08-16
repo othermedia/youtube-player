@@ -121,18 +121,19 @@ var YoutubePlayer = new JS.Class({
             wrapWidth   = elements._container.getWidth() -
                 elements._playButton.getWidth() -
                 elements._volumeWrapper.getWidth(),
-            sliderWidth = wrapWidth -
+            limit       = wrapWidth -
                 slider.siblings().reduce(function(rt, e) { return rt + e.getWidth(); }, 0);
         
         elements._progressWrapper.setStyle({width: wrapWidth + 'px'});
-        slider.setStyle({width: sliderWidth + 'px'});
+        slider.setStyle({width: limit + 'px'});
         
-        var limit = this._progressSliderLimit = sliderWidth - thumbWidth;
+        this._progressSliderLimit = limit;
         this._progressSlider = YAHOO.widget.Slider.getHorizSlider(elements._progressSlider.node,
                 elements._progressSliderThumb.node, 0, this._progressSliderLimit);
         
         this._progressBar = Ojay(Ojay.HTML.div({className: 'progress-bar'})).setStyle({width: 0});
-        Ojay(this._progressSlider.getEl()).insert(this._progressBar, 'before');
+        this._loadedBar   = Ojay(Ojay.HTML.div({className: 'loaded-bar'})).setStyle({width: 0});
+        Ojay(this._progressSlider.getEl()).insert(this._loadedBar, 'before').insert(this._progressBar, 'before');
         
         this._thumbWidth = thumbWidth;
         
@@ -264,6 +265,44 @@ var YoutubePlayer = new JS.Class({
         return '';
     }},
     
+    
+    /**
+     * Updates the time display
+     * @returns {YoutubePlayer}
+     */
+    updateTime: function() { try {
+        var player = this._getPlayer();
+        this._elements._time.setContent(this.getTimeString());
+        var time     = player.getCurrentTime(),
+            duration = player.getDuration(),
+            offset   = time / duration,
+            distance = (time < 0 || duration < 0) ? 0 :
+                offset * this._progressSliderLimit;
+        
+        this._progressSlider.setValue(distance, true, true, true);
+        this._progressBar.setStyle({width: distance + 'px'});
+        this.updateLoaded();
+        
+        return this;
+    } catch (e) {
+        return this;
+    }},
+    
+    /**
+     * Updates the loading bar.
+     * @returns {YoutubePlayer}
+     */
+    updateLoaded: function() {
+        var player   = this._getPlayer(),
+            loaded   = player.getVideoBytesLoaded(),
+            total    = player.getVideoBytesTotal(),
+            distance = (loaded < 0 || total < 0) ? 0 :
+                this._progressSliderLimit * (loaded / total);
+        
+        this._loadedBar.setStyle({width: distance + 'px'});
+        return this;
+    },
+    
     /**
      * Dispatches event calls from the YouTube API to Ojay.Observable's named
      * event listener system. See YoutubePlayer.STATES for event names.
@@ -299,15 +338,6 @@ var YoutubePlayer = new JS.Class({
              */
             toggle: function() {
                 return this.play();
-            },
-            
-            /**
-             * Updates the time display
-             * @returns {YoutubePlayer}
-             */
-            updateTime: function() {
-                this._elements._time.setContent(this.getTimeString());
-                return this;
             }
         },
         
@@ -325,26 +355,7 @@ var YoutubePlayer = new JS.Class({
              */
             toggle: function() {
                 return this.pause();
-            },
-            
-            /**
-             * Updates the time display
-             * @returns {YoutubePlayer}
-             */
-            updateTime: function() { try {
-                var player = this._getPlayer();
-                this._elements._time.setContent(this.getTimeString());
-                var offset   = player.getCurrentTime() / player.getDuration(),
-                    distance = offset * this._progressSliderLimit;
-                
-                this._progressSlider.setValue(distance, true, true, true);
-                
-                this._progressBar.setStyle({width: this._thumbWidth * offset + 
-                                                   distance + 'px'});
-                return this;
-            } catch (e) {
-                return this;
-            }}
+            }
         }
     },
     

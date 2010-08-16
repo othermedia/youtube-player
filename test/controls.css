@@ -80,6 +80,11 @@
     overflow:hidden;
 }
 
+.youtube-controls .progress-bar, .youtube-controls .loaded-bar, .youtube-controls .thumb {
+    font-size:0;
+    line-height:0;
+}
+
 .youtube-controls .progress-bar {
     height:6px;
     margin:8px 0;
@@ -87,13 +92,19 @@
     top:0;
     left:81px;
     background:#fff;
-    z-index:3;
-    font-size:0;
-    line-height:0;
+}
+
+.youtube-controls .loaded-bar {
+    height:4px;
+    margin:9px 0;
+    position:absolute;
+    top:0;
+    left:81px;
+    background:#797979;
 }
 
 .youtube-controls .thumb {
-    width:30px;
+    width:5px;
     height:6px;
     overflow:hidden;
     margin:0;
