@@ -156,7 +156,10 @@ var YoutubePlayer = new JS.Class({
      * @returns {YoutubePlayer}
      */
     setVolume: function(volume) {
-    	if (volume === undefined) volume = this._getPlayer().getVolume();
+    	if (volume === undefined) {
+    	    volume = this._getPlayer().getVolume();
+    	    if (typeof volume != 'number' || volume < 0) volume = 1;
+	    }
         if (volume > 1) volume = volume / 100;
         
         var distance = volume * this._volumeSliderLimit;
