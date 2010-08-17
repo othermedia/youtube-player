@@ -89,7 +89,7 @@ the `LICENSE` file for details. It was developed by **Benedict Eastaugh**,
 **James Coglan**, **Gareth Rake** and **Hollie Lubbock** at
 [the OTHER media][othermedia].
 
-  [othertech]:  http://tech.othermedia.org
+  [othertech]:  http://tech.othermedia.org/articles/accessible-youtube-player
   [jsclass]:    http://jsclass.jcoglan.com
   [ojay]:       http://ojay.othermedia.com
   [swfobject]:  http://code.google.com/p/swfobject/
