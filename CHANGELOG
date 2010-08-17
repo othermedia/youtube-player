@@ -2,6 +2,7 @@
 
 * Make play/pause button always have the content "Play/pause" rather than
   changing it when the player state changes.
+* Ensure that the volume is set correctly when starting the player.
 
 2010.08.16, Version 1.2.0
 

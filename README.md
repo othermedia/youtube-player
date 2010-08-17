@@ -61,7 +61,7 @@ depends on, and using the `require` function as usual:
     Helium.use('yui', '2.8.0r4');
     Helium.use('ojay', '0.4.2');
     Helium.use('swfobject', 'master');
-    Helium.use('youtube-player', '1.2.0');
+    Helium.use('youtube-player', '1.2.1');
     
     require('YoutubePlayer', function() {
           YoutubePlayer.API_KEY = '_api_key_';

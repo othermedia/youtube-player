@@ -247,7 +247,7 @@ var YoutubePlayer = new JS.Class({
         this.setState('PAUSED');
         this.notifyObservers('ready');
         setInterval(this.method('updateTime'), 250);
-        this.setVolume();
+        this.setVolume(100);
     },
     
     /**
