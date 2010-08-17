@@ -1,3 +1,8 @@
+2010.08.17, Version 1.2.1
+
+* Make play/pause button always have the content "Play/pause" rather than
+  changing it when the player state changes.
+
 2010.08.16, Version 1.2.0
 
 * Make play/pause button keyboard-accessible.
